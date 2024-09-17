@@ -1,0 +1,95 @@
+:root {
+  --sz: 100%;
+  --wd: 15rem;
+  --ht: 12rem;
+  --rd: .2lh;
+  --pd: 1.125rem;
+  --fnt-play: 'Play', sans-serif;
+  --fnt-abel: 'Abel', sans-serif;
+  --unit: 5;
+  --fnt-sz: calc(var(--pd) / var(--unit) * 2);
+  --black-color: #141304;
+  --white-color: #f8f3f4;
+  --blue-color: #6ab9ee;
+  --light-grey: #d3d3d3;
+  --dark-grey: #989392;
+}
+
+:where(html, body) { margin: 0; }
+:where(.color--name, .copy--btn, .color--info__container) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container { 
+  margin-inline: var(--pd);
+  margin-block-start: var(--pd);
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: var(--pd);
+  }
+}
+
+.palette--container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  place-items: center;
+  width: var(--sz);
+  height: var(--ht);
+  border-radius: .3lh;
+  box-shadow: .5vmin .5vmin .25lh rgb(0 0 0 / .5);
+  .color--name,
+  .copy--btn { 
+    grid-column: 2 / 3;
+    width: var(--sz);
+  }
+
+  .color--name {
+    grid-row: 1;
+    max-width: calc(var(--wd) * .5);
+    font-size: 1.25rem;
+    font-weight: 400;
+    padding-block: .5rem;
+    padding-inline: 1rem;
+    border-radius: .2lh;
+    margin-block-start: 1rem;
+    margin-block-end: .5rem;
+    box-shadow: .15vmin .15vmin .15lh rgba(0, 0, 0, .45) inset,
+      -.15vmin -.15vmin .15lh rgba(255, 255, 255, .45) inset;
+  }
+
+  .copy--btn {
+    grid-row: 2;
+    min-width: calc(var(--wd) * .7);
+    padding-block: .75rem;
+    padding-inline: 1rem;
+    margin-block-end: .5rem;
+    font: 700 .85rem sans-serif;
+    letter-spacing: .03lh;
+    text-transform: uppercase;
+    border: .1lh solid rgba(0, 0, 0, .4);
+    outline: none;
+    border-radius: .2lh;
+    background-color: var(--blue-color);
+    box-shadow: .25vmin .25vmin 0  .035lh rgba(0, 0, 0, .45);
+    color: var(--white-color);
+  }
+
+  .color--info__container {
+    grid-row: 3;
+    grid-column: 1 / -1;
+    justify-content: flex-start;
+    width: var(--sz);
+    height: var(--sz);
+    background-color: var(--white-color);
+    border-radius: 0 0 .3lh .3lh;
+    .info {
+      padding-inline-start: 1rem;
+      font: 600 1.125rem sans-serif;
+      text-transform: capitalize;
+      color: var(--dark-color)
+    }
+  }
+}
