@@ -5,11 +5,11 @@
   The function will be called after being stops it's execution for "n" milliseconds
 */
 
-export const debounce = (func, wait, immediate) => {
+export function debounce(func, wait, immediate){
   let timer;
   const later = () => {
     if(!immediate){
-      func.apply(wait, arguments)
+      func.apply(this, arguments)
     }
   }
 
