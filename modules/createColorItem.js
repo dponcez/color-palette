@@ -10,6 +10,7 @@ import { debounce } from "../utils/debounce.js"
  */
 
 const eventHandler = ($, event, callback) => $.addEventListener(event, callback);
+const selector = (element) => document.querySelector(element);
 
 export const initApp = () => {
   const createColorItems = (color, description) => {
@@ -20,7 +21,6 @@ export const initApp = () => {
       copyBtn: createElementByClass('button', 'copy--btn'),
       infoContainer: createElementByClass('div', 'color--info__container'),
       info: createElementByClass('p', 'info'),
-      closeAlertBtn: createElementByClass('button', 'close'),
       alertBox: createElementByClass('div', 'box'),
       message: createElementByClass('p', 'message'),
       audio: createElementByClass('audio', 'player')
@@ -32,13 +32,13 @@ export const initApp = () => {
       copyBtn,
       infoContainer,
       info,
-      closeAlertBtn,
       alertBox,
       message,
       audio
     } = htmlRefs;
   
-    const grid = document.querySelector('[data-grid]');
+    const grid = selector('[data-grid]');
+    const container = selector('.container');
   
     paletteContainer.style.backgroundColor = color;
     colorName.textContent = color;
@@ -46,20 +46,22 @@ export const initApp = () => {
     info.textContent = description;
   
     if(color === '#000000'){
-      colorName.style.color = '#ffffff'
+      colorName.style.color = '#f5f6f7'
     }
 
     // event
     eventHandler(copyBtn, 'click', debounce( async () => {
-      await navigator.clipboard.writeText(colorName);
+      await navigator.clipboard.writeText(colorName.textContent);
 
       message.textContent = 'copied!';
-      closeAlertBtn.textContent = 'x';
 
-      alertBox.appendChild(closeAlertBtn);
       alertBox.appendChild(message);
+      container.appendChild(alertBox);
 
-      grid.appendChild(alertBox);
+      setTimeout(() => {
+        container.removeChild(alertBox);
+      }, 1000)
+
       
     }, false))
   
