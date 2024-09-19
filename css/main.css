@@ -8,23 +8,42 @@
   --fnt-abel: 'Abel', sans-serif;
   --unit: 5;
   --fnt-sz: calc(var(--pd) / var(--unit) * 2);
-  --black-color: #141304;
-  --white-color: #f8f3f4;
-  --blue-color: #6ab9ee;
-  --light-grey: #d3d3d3;
-  --dark-grey: #989392;
+  --black-color: hsl(56, 67%, 5%);
+  --white-color: hsl(348, 26%, 96%);
+  --blue-color: hsl(204, 80%, 67%);
+  --light-grey: hsl(0, 0%, 83%);
+  --dark-grey: hsl(10, 3%, 58%);
+  --red-color: hsl(14, 91%, 36%);
 }
 
 :where(html, body) { margin: 0; }
-:where(.color--name, .copy--btn, .color--info__container) {
+:where(.color--name, .copy--btn, .color--info__container, .box, .message) {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
+button { 
+  cursor: pointer;
+  &:active { transform: scale(.98) }
+}
+
 .container { 
-  margin-inline: var(--pd);
-  margin-block-start: var(--pd);
+  margin: var(--pd);
+  .box {
+    width: var(--sz);
+    background-color: var(--red-color);
+    border-radius: calc(var(--rd) * .35);
+    position: absolute;
+    top: 0;
+    left: 0;
+    .message {
+      margin: 0;
+      color: var(--white-color);
+      font: 500 calc(var(--pd) * 5.25) var(--fnt-abel);
+      text-transform: capitalize
+    }
+  }
   .grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
