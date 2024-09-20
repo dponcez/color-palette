@@ -58,10 +58,15 @@ export const initApp = () => {
       alertBox.appendChild(message);
       container.appendChild(alertBox);
 
+      audio.src = '../assets/sound/sound.mp3';
+
+      if(alertBox.classList.contains('box')){
+        audio.play()
+      }
+
       setTimeout(() => {
         container.removeChild(alertBox);
-      }, 1000)
-
+      }, 1500)
       
     }, false))
   
