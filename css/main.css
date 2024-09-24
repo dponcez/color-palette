@@ -9,19 +9,25 @@
   --unit: 5;
   --fnt-sz: calc(var(--pd) / var(--unit) * 2);
   --black-color: hsl(56, 67%, 5%);
-  --white-color: hsl(348, 26%, 96%);
+  --white-color: #f8f6f5;
   --blue-color: hsl(204, 80%, 67%);
   --light-grey: hsl(0, 0%, 83%);
   --dark-grey: hsl(10, 3%, 58%);
   --red-color: hsl(14, 91%, 36%);
 }
 
-:where(html, body) { margin: 0; }
-:where(.color--name, .copy--btn, .color--info__container, .box, .message) {
+:where(html, body, p, code) { margin: 0; }
+:where(.hex--color, .name--color, .copy--btn, .hex--info__container, .box, .message) {
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
+:where(.info--container, .copy--btn) { 
+    border: .2lh solid var(--dark-grey); }
+:where(.title, .copy--btn) { text-transform: uppercase; }
+:where(p, code) { color: var(--dark-grey) }
+
 
 button { 
   cursor: pointer;
@@ -53,62 +59,69 @@ button {
 
 .palette--container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr;
   place-items: center;
-  width: var(--sz);
-  height: var(--ht);
-  border-radius: .3lh;
-  box-shadow: .5vmin .5vmin .25lh rgb(0 0 0 / .5);
-  .color--name,
-  .copy--btn { 
-    grid-column: 2 / 3;
-    width: var(--sz);
-  }
+  width: var(--wd);
 
-  .color--name {
+  .hex--color {
     grid-row: 1;
-    max-width: calc(var(--wd) * .5);
-    font-size: 1.25rem;
-    font-weight: 400;
-    padding-block: .5rem;
-    padding-inline: 1rem;
-    border-radius: .2lh;
-    margin-block-start: 1rem;
-    margin-block-end: .5rem;
-    box-shadow: .15vmin .15vmin .15lh rgba(0, 0, 0, .45) inset,
-      -.15vmin -.15vmin .15lh rgba(255, 255, 255, .45) inset;
-  }
-
-  .copy--btn {
-    grid-row: 2;
-    min-width: calc(var(--wd) * .7);
-    padding-block: .75rem;
-    padding-inline: 1rem;
-    margin-block-end: .5rem;
-    font: 700 .85rem sans-serif;
-    letter-spacing: .03lh;
-    text-transform: uppercase;
-    border: .1lh solid rgba(0, 0, 0, .4);
-    outline: none;
-    border-radius: .2lh;
+    width: var(--sz);
+    height: calc(var(--ht) * 2);
     background-color: var(--blue-color);
-    box-shadow: .25vmin .25vmin 0  .035lh rgba(0, 0, 0, .45);
-    color: var(--white-color);
+    border-radius: calc(var(--rd) * 2);
+    box-shadow: .75vmin .75vmin .75rem rgba(0, 0, 0, .45) inset, -.75vmin -.75vmin 1rem rgba(255, 255, 255, .45) inset, .35vmin .35vmin .75rem rgba(1, 1, 1, .5);
+
   }
 
-  .color--info__container {
+  .info--container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    width: calc(var(--sz) - .35rem);
+    height: calc(var(--ht) * .65);
+    margin-block-start: calc(var(--pd) * .5);
+    background-color: var(--white-color);
+    border-radius: var(--rd) var(--rd) 0 0;
+    box-shadow: .15vmin .15vmin .25rem rgba(0, 0, 0, .45) inset, -.15vmin -.15vmin .25rem rgba(255, 255, 255, .45) inset;    
+    .hex--info__container {
+      grid-row: 1;
+      grid-column: 1 / -1;
+      padding-inline: var(--pd);
+      justify-content: space-between;
+      border: .2lh solid transparent;
+      border-bottom-color: rgba(0, 0, 0, .025);
+      .name--info {
+        font: 800 calc(var(--pd) * 1.25) var(--fnt-play);
+        text-transform: capitalize;
+      }
+      .hex--info { 
+        font-size: var(--pd);
+        font-family: var(--fnt-abel)
+      }
+    }
+    .title {
+      grid-row: 2;
+      grid-column: 1 / -1;
+      margin: auto 0;
+      padding-inline-start: var(--pd);
+      font: 700 calc(var(--pd) * .85) var(--fnt-play);
+      color: var(--blue-color)
+    }
+  }
+  
+  .copy--btn {
     grid-row: 3;
     grid-column: 1 / -1;
-    justify-content: flex-start;
     width: var(--sz);
-    height: var(--sz);
-    background-color: var(--white-color);
-    border-radius: 0 0 .3lh .3lh;
-    .info {
-      padding-inline-start: 1rem;
-      font: 600 1.125rem sans-serif;
-      text-transform: capitalize;
-      color: var(--dark-color)
-    }
+    height: calc(var(--pd) * 2);
+    font: 700 1rem var(--fnt-play);
+    letter-spacing: .03lh;
+    outline: none;
+    border-radius: 0 0 var(--rd) var(--rd);
+    background-image: linear-gradient(
+      45deg,
+      var(--blue-color) 5%,
+      var(--black-color) 85%
+      );
+    color: var(--white-color);
   }
 }
