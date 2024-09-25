@@ -52,7 +52,7 @@ button {
   }
   .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(13.75em, 1fr));
     gap: var(--pd);
   }
 }
