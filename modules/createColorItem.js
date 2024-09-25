@@ -67,7 +67,7 @@ export const initApp = () => {
     eventHandler(copyBtn, 'click', debounce( async () => {
 
       try {
-        await navigator.clipboard.writeText(colorName.textContent);
+        await navigator.clipboard.writeText(hexInfo.textContent);
   
         message.textContent = 'copied!';
   
