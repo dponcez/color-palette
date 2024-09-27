@@ -1,4 +1,4 @@
-# Color Palette 
+# Color Palette ![#f03c15](https://via.placeholder.com/15/f03c15/000000?text=+) ![#ecf0f1](https://via.placeholder.com/15/ecf0f1/000000?text=+) ![#3498db](https://via.placeholder.com/15/3498db/000000?text=+) ![#2c3e50](https://via.placeholder.com/15/2c3e50/000000?text=+)
 
 Color palette is a simple tool, in which you can copy the hexadecimal color, to be used in any project.
 
@@ -21,6 +21,7 @@ On the internet, you can get this type of more sophisticated tools, this is a pr
     └── 📁assets
         └── 📁images
             └── old-image.png
+            └── new-ui-image.png
         └── 📁sound
             └── sound.mp3
     └── 📁css
@@ -211,4 +212,74 @@ The ```debounce()``` function forces a function to wait a few times before runni
   </figcaption>
 </figure>
 
-We will update the color palette in a few days to change the _UI_
+### New UI Color Palette Version
+
+~~We will update the color palette in a few days to change the _UI_~~ 
+
+As you can see in the image below, the _User Interface_ (UI) is different from the latest version. In the last version of color palette UI, the color value was inside of the color box, just like the button, also the container of each color palette was smaller, now the new UI is more intuitive and easier to use and understand.
+
+<figure>
+  <img src="./assets/images/new-ui-image.png">
+  <figcaption>
+    <p>Color Palette - New UI Version</p>
+  </figcaption>
+</figure>
+
+### Refactored Code - Color Palette Item
+
+As you can see in the code below, only a few variables were changed, the ```try/catch``` statement was also added in the eventHandler function call, so that the code found in the ```try``` block is executed first and if it's thrown an exception, the code found in the ```catch``` block will be executed, if no exception is thrown in the ```try``` block, the ```catch``` block will be skipped.
+
+```js
+  // createColorItem.js
+
+  import { createElementByClass } from "./createElements.js"
+  import { debounce } from "../utils/debounce.js"
+
+  /**
+   * Color Palette
+   * 
+   * @param { string } color: based on the value of the current color
+   * @param { string } description: information based on the color name
+   * @returns { HTMLElement } 
+   */
+
+  const eventHandler = ($, event, callback) => $.addEventListener(event, callback);
+  const selector = (element) => document.querySelector(element);
+  const log = (value) => console.log(value);
+
+  export const initApp = () => {
+    const createColorItem = (color, description) => {
+
+      const htmlRefs = {
+        paletteContainer: createElementByClass('div', 'palette--container'),
+        hexColor: createElementByClass('div', 'hex--color'),
+        infoContainer: createElementByClass('div', 'info--container'),
+        hexInfoContainer: createElementByClass('div', 'hex--info__container'),
+        nameInfo: createElementByClass('p', 'name--info'),
+        hexInfo: createElementByClass('code', 'hex--info'),
+        audio: createElementByClass('audio', '')
+        //...
+      }
+
+      const {
+        palettContainer,
+        hexColor,
+        infoContainer,
+        hexInfoContainer,
+        nameInfo,
+        hexInfo
+        //...
+      } = htmlRefs;
+
+      eventHandler(copyBtn, 'click', debounce(async () => {
+        try {
+          await navigator.clipboard.writeText(colorName.textContent);
+        }catch(error){
+          log(`Error to copy the hex color: ${error}`)
+        }
+      }))
+    }
+  }
+```
+
+The full code you can see in this repository.
